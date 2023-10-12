@@ -27,6 +27,16 @@ app.post("/shoes", async (req, res) => {
   res.status(200).send("Shoes posted successfully");
 });
 
+app.delete("/shoes/:id", async (req, res) => {
+  const shoesId = req.params.id;
+  const remove = await knex("shoes").where("id", shoesId).del();
+  if (remove) {
+    return res.send("Shoes had been deleted");
+  } else {
+    return res.send("Shoes is not found");
+  }
+});
+
 app.listen(port, (err) => {
   if (!err) {
     console.log("running on port " + port);
