@@ -8,6 +8,10 @@ const port = 3000;
 app.use(express.json());
 app.use(cors());
 
+app.get("/shoes", async (req, res) => {
+  const shoes = await knex("shoes").select();
+  res.json(shoes);
+});
 
 app.listen(port, (err) => {
   if (!err) {
