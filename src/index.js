@@ -37,6 +37,16 @@ app.delete("/shoes/:id", async (req, res) => {
   }
 });
 
+app.put("/shoes/:id", async (req, res) => {
+  if (!req.body.model) {
+    return res.status(400).send("Please fill the missing fields");
+  }
+  const shoesId = req.params.id;
+  await knex("shoes").where("id", shoesId).update({ model: req.body.model });
+
+  res.status(200).send("Shoes updated successfully");
+});
+
 app.listen(port, (err) => {
   if (!err) {
     console.log("running on port " + port);
