@@ -13,6 +13,20 @@ app.get("/shoes", async (req, res) => {
   res.json(shoes);
 });
 
+app.post("/shoes", async (req, res) => {
+  if (!req.body.brand || !req.body.model) {
+    return res.status(400).send({ error: "Fill the missings fields" });
+  }
+
+  const newShoes = {
+    brand: req.body.brand,
+    model: req.body.model,
+  };
+
+  await knex("shoes").insert(newShoes);
+  res.status(200).send("Shoes posted successfully");
+});
+
 app.listen(port, (err) => {
   if (!err) {
     console.log("running on port " + port);
