@@ -13,6 +13,12 @@ app.get("/shoes", async (req, res) => {
   res.json(shoes);
 });
 
+app.get("/shoes/:id", async (req, res) => {
+  const shoesId = req.params.id;
+  const shoes = await knex("shoes").where("id", shoesId);
+  res.json(shoes);
+});
+
 app.post("/shoes", async (req, res) => {
   if (!req.body.brand || !req.body.model) {
     return res.status(400).send({ error: "Fill the missings fields" });
