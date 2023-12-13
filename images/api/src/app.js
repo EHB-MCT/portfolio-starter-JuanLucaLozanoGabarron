@@ -17,7 +17,6 @@ app.get("/shoes", async (req, res) => {
 app.get("/shoes/:model", async (req, res) => {
   const shoeModel = req.params.model;
   const shoes = await knex("shoes").where("model", shoeModel);
-  console.log(shoes);
   if (shoes.length !== 0) {
     return res.status(200).json(shoes);
   }
@@ -25,16 +24,23 @@ app.get("/shoes/:model", async (req, res) => {
 });
 
 app.post("/shoes", async (req, res) => {
-  if (!checkShoeInput(req)) {
+  if (!checkShoeInput(req.body)) {
     return res.status(400).send({ error: "Fill the missings fields" });
   }
+  const shoeModel = req.body.model;
+  const shoes = await knex("shoes").where("model", shoeModel);
+  if (shoes.length !== 0) {
+    return res.status(400).json({ error: "Shoe already exists" });
+  }
+
   const newShoes = {
     brand: req.body.brand,
     model: req.body.model,
+    img: req.body.img,
   };
 
   await knex("shoes").insert(newShoes);
-  res.status(200).send("Shoes posted successfully");
+  res.status(200).send({ message: "Shoes posted successfully" });
 });
 
 app.delete("/shoes/:model", async (req, res) => {
