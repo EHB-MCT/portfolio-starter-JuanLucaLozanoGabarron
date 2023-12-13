@@ -17,6 +17,17 @@ services:
       db:
         condition: service_healthy
 
+  react:
+    image: juanluca/shoeapp:latest
+    build: images/shoeApp
+    ports:
+      - 5173:5173
+    volumes:
+      - ./images/shoeApp/src:/usr/app/src
+    depends_on:
+      db:
+        condition: service_healthy
+
   db:
     image: postgres:16.0
     healthcheck:
