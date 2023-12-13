@@ -1,5 +1,6 @@
 services:
   api:
+    image: juanluca/shoeapi:latest
     build: images/api
     container_name: api
     ports:
