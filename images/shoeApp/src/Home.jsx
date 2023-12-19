@@ -11,12 +11,16 @@ export default function Home() {
   const handleShow = () => setShow(true);
 
   const [shoes, setShoes] = useState([]);
+
+  //Inputs used to fetch a POST method
   const [inputs, setInputs] = useState({
     brand: "",
     model: "",
     img: "",
   });
 
+  //POST method of the API
+  //Add shoe by filling the form take value of inputs
   const newShoe = (e) => {
     e.preventDefault();
     console.log(inputs);
@@ -34,7 +38,7 @@ export default function Home() {
       });
   };
 
-  //Delete endpoint of the API
+  //DELETE method of the API
   //Delete shoe by model (click on button and call deleteShoe function)
 
   const deleteShoe = (shoe) => {
