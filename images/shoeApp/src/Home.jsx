@@ -34,7 +34,10 @@ export default function Home() {
       });
   };
 
-  const handleDelete = (shoe) => {
+  //Delete endpoint of the API
+  //Delete shoe by model (click on button and call deleteShoe function)
+
+  const deleteShoe = (shoe) => {
     fetch(`http://localhost:3000/shoes/${shoe}`, {
       method: "DELETE",
     })
@@ -143,7 +146,7 @@ export default function Home() {
                   <p>{shoes.model}</p>
                   <br />
                   <br />
-                  <button id="delete" onClick={() => handleDelete(shoes.model)}>
+                  <button id="delete" onClick={() => deleteShoe(shoes.model)}>
                     Delete sneakers
                   </button>
                 </div>
