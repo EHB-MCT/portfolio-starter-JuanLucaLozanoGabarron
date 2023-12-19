@@ -17,6 +17,16 @@ export default function Home() {
     img: "",
   });
 
+  const handleDelete = (shoe) => {
+    fetch(`http://localhost:3000/shoes/${shoe}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then(() => {
+        location.reload();
+      });
+  };
+
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
@@ -116,7 +126,9 @@ export default function Home() {
                   <p>{shoes.model}</p>
                   <br />
                   <br />
-                  <button id="delete">Delete sneakers</button>
+                  <button id="delete" onClick={() => handleDelete(shoes.model)}>
+                    Delete sneakers
+                  </button>
                 </div>
               </div>
             );
