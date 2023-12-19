@@ -6,10 +6,15 @@ import "./home.css";
 import "./collection.css";
 
 export default function Home() {
+
+  //State of modal
   const [show, setShow] = useState(false);
+  //Close the modal when run the function
   const handleClose = () => setShow(false);
+  //Open the modal when run the function
   const handleShow = () => setShow(true);
 
+  //State of shoe in GET method
   const [shoes, setShoes] = useState([]);
 
   //Inputs used to fetch a POST method
@@ -40,7 +45,6 @@ export default function Home() {
 
   //DELETE method of the API
   //Delete shoe by model (click on button and call deleteShoe function)
-
   const deleteShoe = (shoe) => {
     fetch(`http://localhost:3000/shoes/${shoe}`, {
       method: "DELETE",
@@ -51,6 +55,8 @@ export default function Home() {
       });
   };
 
+  //GET method of the API
+  //Get all the shoes in the database
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
