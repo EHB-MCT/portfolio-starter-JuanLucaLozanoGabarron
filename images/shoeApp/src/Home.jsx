@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
@@ -10,7 +10,23 @@ export default function Home() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  
+  const [shoes, setShoes] = useState([]);
+  const [inputs, setInputs] = useState({
+    brand: "",
+    model: "",
+    img: "",
+  });
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+    fetch("http://localhost:3000/shoes", { signal })
+      .then((response) => response.json())
+      .then((data) => {
+        setShoes(data);
+      });
+    return () => controller.abort();
+  }, []);
 
   return (
     <>
@@ -89,24 +105,22 @@ export default function Home() {
         </Button>
 
         <div className="list">
-    
+          {shoes.map((shoes, index) => {
             return (
               <div className="card">
                 <div className="image">
-                  <img src="" alt="" />
+                  <img src={shoes.img} alt="" />
                 </div>
                 <div className="info">
-                  <h2>Brand</h2>
-                  <p>Model</p>
+                  <h2>{shoes.brand}</h2>
+                  <p>{shoes.model}</p>
                   <br />
                   <br />
-                  <button id="delete" >
-                    Delete sneakers
-                  </button>
+                  <button id="delete">Delete sneakers</button>
                 </div>
               </div>
             );
-        
+          })}
         </div>
       </div>
     </>
