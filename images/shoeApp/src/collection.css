@@ -1,0 +1,41 @@
+.card {
+  width: 420px;
+  height: 250px;
+  background-color: #e3e4e0;
+  border-radius: 25px;
+  margin-bottom: 40px;
+  display: flex;
+}
+
+.image {
+  background-color: blue;
+  height: 210px;
+  width: 210px;
+  margin: 20px;
+  display: flex;
+}
+.image img {
+  width: 100%;
+}
+
+.card h2 {
+  margin-top: 40px;
+}
+
+button {
+  width: 100px;
+  height: 20px;
+  background-color: #7f867b;
+  color: white;
+  font-family: Montserrat;
+  font-size: 10px;
+  border: 0px;
+}
+
+#update {
+  margin-top: 45px;
+}
+
+#delete {
+  margin-top: 20px;
+}
