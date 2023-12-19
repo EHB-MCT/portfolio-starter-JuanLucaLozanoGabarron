@@ -17,6 +17,23 @@ export default function Home() {
     img: "",
   });
 
+  const newShoe = (e) => {
+    e.preventDefault();
+    console.log(inputs);
+
+    fetch(`http://localhost:3000/shoes`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(inputs),
+    })
+      .then((response) => response.json())
+      .then(() => {
+        location.reload();
+      });
+  };
+
   const handleDelete = (shoe) => {
     fetch(`http://localhost:3000/shoes/${shoe}`, {
       method: "DELETE",
@@ -42,7 +59,7 @@ export default function Home() {
     <>
       <div>
         <h1>SNEACAT</h1>
-        <Modal id="modal" show={show} onHide={handleClose}>
+        <Modal id="modal" show={show} onHide={handleClose} onSubmit={newShoe}>
           <Modal.Title>
             {" "}
             <h2>Add new shoes to your catalogue</h2>{" "}
